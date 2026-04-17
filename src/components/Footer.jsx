@@ -1,56 +1,58 @@
-import { Instagram, Twitter, Linkedin, Github, Dribbble } from 'lucide-react'
-
 export default function Footer() {
+  const year = new Date().getFullYear()
   return (
     <footer className="footer">
       <div className="container">
-        <div className="footer-grid">
-          <div className="footer-brand">
-            <a href="#top" className="logo">
-              <span className="logo-mark">B</span>
-              Brandfueler
-            </a>
-            <p>A full-stack creative studio fueling ambitious brands with design, code, and strategy.</p>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', fontFamily: 'var(--mono)', fontSize: 11, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#a79c8a' }}>
+          <span>&mdash; Colophon</span>
+          <span>Vol. IV &middot; Issue 04 &middot; {year}</span>
+          <a href="#top">Back to top &uarr;</a>
+        </div>
+        <h2 className="foot-brand">Brandfueler<em>.</em></h2>
+
+        <div className="foot-grid">
+          <div className="foot-col">
+            <h5>Editor&rsquo;s Note</h5>
+            <p className="foot-blurb">
+              An independent creative studio made for <em>founders in motion</em>. Six disciplines, one desk, zero jargon. Filed from wherever the work demands &mdash; shipped back on time.
+            </p>
           </div>
-          <div>
-            <h5>Services</h5>
+          <div className="foot-col">
+            <h5>Fluencies</h5>
             <ul>
-              <li><a href="#services">SEO</a></li>
-              <li><a href="#services">Web Development</a></li>
-              <li><a href="#services">Game Development</a></li>
-              <li><a href="#services">Graphic Design</a></li>
-              <li><a href="#services">UI / UX Design</a></li>
-              <li><a href="#services">Social Media</a></li>
+              <li><a href="#fluencies">Search</a></li>
+              <li><a href="#fluencies">Engineering</a></li>
+              <li><a href="#fluencies">Games</a></li>
+              <li><a href="#fluencies">Identity</a></li>
+              <li><a href="#fluencies">Interfaces</a></li>
+              <li><a href="#fluencies">Social</a></li>
             </ul>
           </div>
-          <div>
+          <div className="foot-col">
             <h5>Studio</h5>
             <ul>
-              <li><a href="#work">Work</a></li>
-              <li><a href="#process">Process</a></li>
-              <li><a href="#testimonials">Clients</a></li>
-              <li><a href="#contact">Contact</a></li>
+              <li><a href="#dossier">Dossier</a></li>
+              <li><a href="#method">Method</a></li>
+              <li><a href="#voices">Voices</a></li>
+              <li><a href="#desk">The Desk</a></li>
             </ul>
           </div>
-          <div>
-            <h5>Resources</h5>
+          <div className="foot-col">
+            <h5>Correspondence</h5>
             <ul>
-              <li><a href="#">Blog</a></li>
-              <li><a href="#">Careers</a></li>
-              <li><a href="#">Press kit</a></li>
-              <li><a href="#">Privacy</a></li>
+              <li><a href="mailto:hello@brandfueler.com">hello@brandfueler.com</a></li>
+              <li><a href="#">Instagram &darr;</a></li>
+              <li><a href="#">Twitter / X &darr;</a></li>
+              <li><a href="#">LinkedIn &darr;</a></li>
+              <li><a href="#">Dribbble &darr;</a></li>
             </ul>
           </div>
         </div>
-        <div className="footer-bottom">
-          <span>© {new Date().getFullYear()} Brandfueler Studio. All rights reserved.</span>
-          <div className="socials">
-            <a href="#" aria-label="Instagram"><Instagram size={16} /></a>
-            <a href="#" aria-label="Twitter"><Twitter size={16} /></a>
-            <a href="#" aria-label="LinkedIn"><Linkedin size={16} /></a>
-            <a href="#" aria-label="Dribbble"><Dribbble size={16} /></a>
-            <a href="#" aria-label="GitHub"><Github size={16} /></a>
-          </div>
+
+        <div className="foot-bottom">
+          <span>&copy; {year} Brandfueler Studio. All rights reserved.</span>
+          <span className="center">Set in <em style={{ fontStyle: 'italic', color: '#ebe4d2' }}>Fraunces</em>, Instrument Serif, Inter Tight &amp; JetBrains Mono.</span>
+          <span className="right">Printed on the open web &middot; no trees harmed.</span>
         </div>
       </div>
     </footer>

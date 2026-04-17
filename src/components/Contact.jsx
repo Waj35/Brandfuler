@@ -1,6 +1,5 @@
-import { motion } from 'framer-motion'
 import { useState } from 'react'
-import { Mail, Phone, MapPin, Send, CheckCircle2 } from 'lucide-react'
+import { Mail, Phone, MapPin, CheckCircle2, ArrowUpRight } from 'lucide-react'
 import { services } from '../data'
 
 export default function Contact() {
@@ -9,102 +8,89 @@ export default function Contact() {
   const submit = (e) => {
     e.preventDefault()
     setSent(true)
-    setTimeout(() => setSent(false), 4000)
     e.currentTarget.reset()
+    setTimeout(() => setSent(false), 4200)
   }
 
   return (
-    <section className="section" id="contact">
+    <section className="sec" id="desk">
       <div className="container">
-        <motion.div
-          className="section-head"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.6 }}
-        >
-          <span className="eyebrow">Let's talk</span>
-          <h2 className="section-title" style={{ marginTop: 18 }}>
-            Got an idea? <span style={{
-              background: 'linear-gradient(90deg, #a855f7, #06b6d4)',
-              WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent'
-            }}>Let's make it real.</span>
+        <div className="sec-head reveal-up">
+          <span className="eyebrow">Section E &middot; The Desk</span>
+          <h2 className="sec-title">
+            Write to the <em>editor.</em>
           </h2>
-        </motion.div>
+          <span className="trail">Replies within 24 hours</span>
+        </div>
 
-        <div className="contact-wrap">
-          <motion.div
-            className="contact-info"
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.7 }}
-          >
-            <h3>Reach out directly</h3>
-            <p>We respond within 1 business day. Or book a 30-min strategy call — on the house.</p>
-            <div className="contact-detail">
-              <div className="contact-detail-icon"><Mail size={18} /></div>
-              <div>
-                <strong>hello@brandfueler.com</strong>
-                <span>Drop us a note anytime</span>
-              </div>
-            </div>
-            <div className="contact-detail">
-              <div className="contact-detail-icon"><Phone size={18} /></div>
-              <div>
-                <strong>+1 (415) 555-0199</strong>
-                <span>Mon – Fri, 9am – 6pm PT</span>
-              </div>
-            </div>
-            <div className="contact-detail">
-              <div className="contact-detail-icon"><MapPin size={18} /></div>
-              <div>
-                <strong>Remote-first, globally</strong>
-                <span>Studios in SF, London & Bangalore</span>
-              </div>
-            </div>
-          </motion.div>
+        <div className="contact-grid">
+          <div className="contact-info reveal-up">
+            <h3>Send a brief,<br />or just a <em>hunch.</em></h3>
+            <p>
+              We read every note ourselves. Whether it&rsquo;s a one-pager, a Figma link, or a voice memo at 2 a.m. &mdash; we&rsquo;ll write you back within a working day.
+            </p>
 
-          <motion.form
-            className="form"
-            onSubmit={submit}
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.7 }}
-          >
+            <ul className="contact-list">
+              <li>
+                <span className="ic"><Mail size={16} /></span>
+                <div>
+                  <div className="l-title">Correspondence</div>
+                  <div className="l-val">hello@brandfueler.com</div>
+                </div>
+                <span className="ar">&rarr;</span>
+              </li>
+              <li>
+                <span className="ic"><Phone size={16} /></span>
+                <div>
+                  <div className="l-title">Switchboard</div>
+                  <div className="l-val">+1 (415) 555&ndash;0199</div>
+                </div>
+                <span className="ar">&rarr;</span>
+              </li>
+              <li>
+                <span className="ic"><MapPin size={16} /></span>
+                <div>
+                  <div className="l-title">Bureaus</div>
+                  <div className="l-val">San Francisco &middot; London &middot; Bangalore</div>
+                </div>
+                <span className="ar">&rarr;</span>
+              </li>
+            </ul>
+          </div>
+
+          <form className="form reveal-up" onSubmit={submit}>
             <div className="form-row">
               <div className="field">
-                <label>Your name</label>
+                <label>01 &middot; Name</label>
                 <input required placeholder="Jane Doe" />
               </div>
               <div className="field">
-                <label>Email</label>
+                <label>02 &middot; Email</label>
                 <input type="email" required placeholder="jane@company.com" />
               </div>
             </div>
             <div className="form-row">
               <div className="field">
-                <label>Company</label>
+                <label>03 &middot; Company</label>
                 <input placeholder="Acme Inc." />
               </div>
               <div className="field">
-                <label>Service</label>
+                <label>04 &middot; Discipline</label>
                 <select defaultValue="">
-                  <option value="" disabled>Choose one…</option>
-                  {services.map(s => <option key={s.title}>{s.title}</option>)}
+                  <option value="" disabled>Choose a fluency&hellip;</option>
+                  {services.map((s) => <option key={s.title}>{s.title}</option>)}
                   <option>Something else</option>
                 </select>
               </div>
             </div>
             <div className="field">
-              <label>Tell us about your project</label>
-              <textarea required placeholder="Timelines, goals, budget, dreams…" />
+              <label>05 &middot; The Brief</label>
+              <textarea required placeholder="Timelines, goals, budget, dreams&hellip;" />
             </div>
-            <button type="submit" className="btn btn-primary" style={{ justifyContent: 'center', padding: '15px 22px' }}>
-              {sent ? <>Message sent <CheckCircle2 size={16} /></> : <>Send message <Send size={15} /></>}
+            <button type="submit" className="btn" style={{ justifyContent: 'center', padding: '16px 22px' }}>
+              {sent ? <>Dispatched to the desk <CheckCircle2 size={14} /></> : <>Send the brief <ArrowUpRight size={14} className="arrow" /></>}
             </button>
-          </motion.form>
+          </form>
         </div>
       </div>
     </section>

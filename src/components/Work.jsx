@@ -1,61 +1,41 @@
-import { motion } from 'framer-motion'
-import { ArrowUpRight } from 'lucide-react'
 import { work } from '../data'
+
+const spans = ['span-7 tall', 'span-5', 'span-4', 'span-4', 'span-4', 'span-5 tall', 'span-7', 'span-12']
 
 export default function Work() {
   return (
-    <section className="section" id="work">
+    <section className="sec" id="dossier">
       <div className="container">
-        <motion.div
-          className="section-head"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.6 }}
-        >
-          <span className="eyebrow">Selected work</span>
-          <h2 className="section-title" style={{ marginTop: 18 }}>
-            Recent launches we're proud of.
+        <div className="sec-head reveal-up">
+          <span className="eyebrow">Section C &middot; Dossier</span>
+          <h2 className="sec-title">
+            Selected <em>fieldwork,</em><br />filed and open.
           </h2>
-        </motion.div>
+          <span className="trail">{String(work.length).padStart(2, '0')} projects &middot; public</span>
+        </div>
 
-        <div className="work-grid">
+        <div className="work-grid reveal-up">
           {work.map((w, i) => (
-            <motion.a
+            <a
               key={w.title}
               href={w.url || '#'}
               target={w.url ? '_blank' : undefined}
               rel={w.url ? 'noopener noreferrer' : undefined}
-              className="work-item"
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.7, delay: i * 0.08 }}
+              className={`work-card ${spans[i] || 'span-4'}`}
             >
-              <div className="work-bg" style={{ background: w.gradient }}>
-                <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style={{ opacity: 0.25 }}>
-                  <defs>
-                    <pattern id={`p${i}`} width="40" height="40" patternUnits="userSpaceOnUse">
-                      <circle cx="20" cy="20" r="1.5" fill="#fff" />
-                    </pattern>
-                  </defs>
-                  <rect width="100%" height="100%" fill={`url(#p${i})`} />
-                </svg>
-              </div>
-              <div className="work-overlay">
-                <span className="work-cat">{w.cat}</span>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
-                  <h4>{w.title}</h4>
-                  <div style={{
-                    width: 44, height: 44, borderRadius: 12,
-                    background: 'rgba(255,255,255,0.15)', backdropFilter: 'blur(10px)',
-                    display: 'grid', placeItems: 'center', color: '#fff'
-                  }}>
-                    <ArrowUpRight size={20} />
-                  </div>
+              <div className="bg" style={{ background: w.gradient }} />
+              <div className="noise" />
+              <div className="meta">
+                <div className="top">
+                  <span className="id">{String(i + 1).padStart(2, '0')} / {String(work.length).padStart(2, '0')}</span>
+                  <span className="cat">{w.cat}</span>
+                </div>
+                <div className="title">
+                  <span>{w.title}</span>
+                  <span className="arr">&#8599;</span>
                 </div>
               </div>
-            </motion.a>
+            </a>
           ))}
         </div>
       </div>

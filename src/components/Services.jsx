@@ -1,54 +1,43 @@
-import { motion } from 'framer-motion'
 import { services } from '../data'
+
+const italicSub = [
+  'ranking, patiently',
+  'shipping, relentlessly',
+  'worlds, playfully',
+  'marks, carefully',
+  'flows, obsessively',
+  'stories, daily',
+]
 
 export default function Services() {
   return (
-    <section className="section" id="services">
+    <section className="sec" id="fluencies">
       <div className="container">
-        <motion.div
-          className="section-head"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.6 }}
-        >
-          <span className="eyebrow">What we do</span>
-          <h2 className="section-title" style={{ marginTop: 18 }}>
-            Six disciplines. <span style={{
-              background: 'linear-gradient(90deg, #a855f7, #06b6d4)',
-              WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent'
-            }}>One creative team.</span>
+        <div className="sec-head reveal-up">
+          <span className="eyebrow">Section A &middot; Fluencies</span>
+          <h2 className="sec-title">
+            Six disciplines,<br /> <em>one desk.</em>
           </h2>
-          <p className="section-sub">
-            From first pixel to final click, we cover the full stack of creative and technical services
-            your brand needs to break out.
-          </p>
-        </motion.div>
+          <span className="trail">{String(services.length).padStart(2, '0')} / {String(services.length).padStart(2, '0')}</span>
+        </div>
 
-        <div className="services-grid">
-          {services.map((s, i) => {
-            const Icon = s.icon
-            return (
-              <motion.div
-                key={s.title}
-                className="service-card"
-                style={{ '--glow-color': s.glow }}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: 0.6, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                whileHover={{ y: -6 }}
-              >
-                <div className="service-glow" />
-                <div className="service-icon"><Icon size={26} /></div>
-                <h3>{s.title}</h3>
-                <p>{s.desc}</p>
-                <div className="service-tags">
-                  {s.tags.map(t => <span key={t}>{t}</span>)}
-                </div>
-              </motion.div>
-            )
-          })}
+        <div className="services">
+          {services.map((s, i) => (
+            <a key={s.title} className="srv-row reveal-up" href="#desk">
+              <span className="srv-num">N&deg; {String(i + 1).padStart(2, '0')}</span>
+              <h3 className="srv-title">
+                {s.title}
+                <em>{italicSub[i]}</em>
+              </h3>
+              <p className="srv-desc">{s.desc}</p>
+              <div className="srv-tags">
+                {s.tags.slice(0, 3).map((t) => (
+                  <span key={t} className="tag-chip">{t}</span>
+                ))}
+              </div>
+              <span className="srv-arrow" aria-hidden>&rarr;</span>
+            </a>
+          ))}
         </div>
       </div>
     </section>

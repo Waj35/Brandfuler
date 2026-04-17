@@ -1,26 +1,24 @@
-import { motion } from 'framer-motion'
-import { ArrowRight } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
 
 export default function CTA() {
   return (
-    <section className="container" style={{ padding: '40px 24px' }}>
-      <motion.div
-        className="cta"
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-80px' }}
-        transition={{ duration: 0.8 }}
-      >
-        <h2>Ready to <span style={{
-          background: 'linear-gradient(90deg, #a855f7, #06b6d4)',
-          WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent'
-        }}>fuel your brand?</span></h2>
-        <p>Whether you're launching tomorrow or planning a rebrand for next year, we'll help you move faster, smarter, and bolder.</p>
-        <div className="cta-actions">
-          <a href="#contact" className="btn btn-primary">Start a project <ArrowRight size={16} /></a>
-          <a href="#work" className="btn btn-ghost">See case studies</a>
+    <section className="sec" style={{ paddingTop: 40, paddingBottom: 40 }}>
+      <div className="container">
+        <div className="cta-block reveal-up">
+          <div className="cta-inner">
+            <h2 className="cta-h">
+              Ready to burn <em>a little rubber?</em>
+            </h2>
+            <div className="cta-side">
+              <p>A brief, a sketch, a Slack thread &mdash; however you start, we&rsquo;ll meet you there within the week.</p>
+              <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+                <a href="#desk" className="btn btn-lime">Start the engine <ArrowUpRight size={14} className="arrow" /></a>
+                <a href="#dossier" className="btn btn-ghost" style={{ color: '#ebe4d2', borderColor: '#ebe4d2' }}>Read the dossier</a>
+              </div>
+            </div>
+          </div>
         </div>
-      </motion.div>
+      </div>
     </section>
   )
 }

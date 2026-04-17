@@ -1,44 +1,46 @@
-import { motion } from 'framer-motion'
 import { testimonials } from '../data'
+
+const highlights = [
+  ['tripled our signups', 'a single quarter'],
+  ['viral', '2M+ plays'],
+  ['exceeded expectations', '380%'],
+]
+
+function emphasize(text, phrases) {
+  let out = text
+  phrases.forEach((p) => {
+    out = out.replace(p, `@@${p}@@`)
+  })
+  const parts = out.split('@@')
+  return parts.map((seg, i) =>
+    i % 2 === 1 ? <em key={i}>{seg}</em> : <span key={i}>{seg}</span>
+  )
+}
 
 export default function Testimonials() {
   return (
-    <section className="section" id="testimonials">
+    <section className="sec" id="voices">
       <div className="container">
-        <motion.div
-          className="section-head"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.6 }}
-        >
-          <span className="eyebrow">Kind words</span>
-          <h2 className="section-title" style={{ marginTop: 18 }}>
-            Clients who keep coming back.
+        <div className="sec-head reveal-up">
+          <span className="eyebrow">Section D &middot; Voices</span>
+          <h2 className="sec-title">
+            What the desk <em>hears back.</em>
           </h2>
-        </motion.div>
+          <span className="trail">Letters to the editor &middot; unedited</span>
+        </div>
 
-        <div className="testimonials-grid">
+        <div className="quotes">
           {testimonials.map((t, i) => (
-            <motion.div
-              key={t.name}
-              className="testimonial"
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.6, delay: i * 0.12 }}
-              whileHover={{ y: -6 }}
-            >
-              <span className="testimonial-quote">"</span>
-              <p>{t.quote}</p>
-              <div className="testimonial-author">
-                <div className="testimonial-avatar">{t.initial}</div>
+            <figure className="quote reveal-up" key={t.name}>
+              <span className="q-mark" aria-hidden>&ldquo;</span>
+              <blockquote className="q-body">{emphasize(t.quote, highlights[i] || [])}</blockquote>
+              <figcaption className="q-attr">
+                <span className="q-avatar">{t.initial}</span>
                 <div>
-                  <strong>{t.name}</strong>
-                  <span>{t.role}</span>
+                  <strong>{t.name}</strong> &nbsp;/&nbsp; <span>{t.role}</span>
                 </div>
-              </div>
-            </motion.div>
+              </figcaption>
+            </figure>
           ))}
         </div>
       </div>
