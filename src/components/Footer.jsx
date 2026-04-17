@@ -8,7 +8,7 @@ export default function Footer() {
           <div className="footer-brand">
             <a href="#top" className="logo">
               <span className="logo-mark">B</span>
-              Brandfuler
+              Brandfueler
             </a>
             <p>A full-stack creative studio fueling ambitious brands with design, code, and strategy.</p>
           </div>
@@ -43,7 +43,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="footer-bottom">
-          <span>© {new Date().getFullYear()} Brandfuler Studio. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} Brandfueler Studio. All rights reserved.</span>
           <div className="socials">
             <a href="#" aria-label="Instagram"><Instagram size={16} /></a>
             <a href="#" aria-label="Twitter"><Twitter size={16} /></a>

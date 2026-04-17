@@ -75,7 +75,7 @@ export const work = [
 
 export const testimonials = [
   {
-    quote: 'Brandfuler redesigned our product and tripled our signups in a single quarter. They move fast, think sharp, and care deeply about the work.',
+    quote: 'Brandfueler redesigned our product and tripled our signups in a single quarter. They move fast, think sharp, and care deeply about the work.',
     name: 'Alicia Tan',
     role: 'CEO, Nebula Finance',
     initial: 'A'

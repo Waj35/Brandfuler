@@ -12,7 +12,7 @@ export default function Navbar() {
       <div className="nav-inner">
         <a href="#top" className="logo">
           <span className="logo-mark">B</span>
-          Brandfuler
+          Brandfueler
         </a>
         <div className="nav-links">
           <a href="#services">Services</a>

@@ -59,7 +59,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.7 }}
         >
-          Brandfuler is a full-stack creative studio helping ambitious brands win with
+          Brandfueler is a full-stack creative studio helping ambitious brands win with
           SEO, websites, games, graphics, UI/UX, and social that actually moves the needle.
         </motion.p>
 

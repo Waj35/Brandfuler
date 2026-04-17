@@ -45,7 +45,7 @@ export default function Contact() {
             <div className="contact-detail">
               <div className="contact-detail-icon"><Mail size={18} /></div>
               <div>
-                <strong>hello@brandfuler.com</strong>
+                <strong>hello@brandfueler.com</strong>
                 <span>Drop us a note anytime</span>
               </div>
             </div>
