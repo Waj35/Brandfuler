@@ -1,44 +1,69 @@
+import { useRef } from 'react'
 import { services } from '../data'
+import { ArrowUpRight } from 'lucide-react'
 
-const italicSub = [
-  'ranking, patiently',
-  'shipping, relentlessly',
-  'worlds, playfully',
-  'marks, carefully',
-  'flows, obsessively',
-  'stories, daily',
-]
+const subs = ['ranking, patiently', 'shipping, relentlessly', 'worlds, playfully', 'marks, carefully', 'flows, obsessively', 'stories, daily']
+
+function TiltCard({ s, i }) {
+  const ref = useRef(null)
+  const Icon = s.icon
+
+  const onMove = (e) => {
+    const el = ref.current
+    if (!el) return
+    const r = el.getBoundingClientRect()
+    const x = (e.clientX - r.left) / r.width - 0.5
+    const y = (e.clientY - r.top) / r.height - 0.5
+    el.style.transform = `rotateX(${(-y * 10).toFixed(2)}deg) rotateY(${(x * 12).toFixed(2)}deg) translateZ(0)`
+  }
+  const onLeave = () => {
+    const el = ref.current
+    if (!el) return
+    el.style.transform = 'rotateX(0) rotateY(0)'
+  }
+
+  return (
+    <article className="svc reveal" ref={ref} onMouseMove={onMove} onMouseLeave={onLeave}>
+      <div className="svc-top">
+        <span className="svc-num">N&deg; {String(i + 1).padStart(2, '0')} / 06</span>
+        <span className="svc-ic"><Icon size={22} /></span>
+      </div>
+      <h3 className="svc-h">
+        {s.title}
+        <em>{subs[i]}</em>
+      </h3>
+      <p className="svc-p">{s.desc}</p>
+      <div className="svc-tags">
+        {s.tags.map((t) => <span key={t}>{t}</span>)}
+      </div>
+    </article>
+  )
+}
 
 export default function Services() {
   return (
-    <section className="sec" id="fluencies">
+    <section className="sec" id="services">
       <div className="container">
-        <div className="sec-head reveal-up">
-          <span className="eyebrow">Section A &middot; Fluencies</span>
+        <div className="sec-head reveal">
+          <span className="sec-eye"><span className="num">01</span> Services</span>
           <h2 className="sec-title">
-            Six disciplines,<br /> <em>one desk.</em>
+            Six <span className="outline">fluencies,</span><br /><em>one studio.</em>
           </h2>
-          <span className="trail">{String(services.length).padStart(2, '0')} / {String(services.length).padStart(2, '0')}</span>
+          <span className="sec-meta">Identity / Interfaces<br />Engineering / Games<br />Search / Social</span>
         </div>
 
-        <div className="services">
-          {services.map((s, i) => (
-            <a key={s.title} className="srv-row reveal-up" href="#desk">
-              <span className="srv-num">N&deg; {String(i + 1).padStart(2, '0')}</span>
-              <h3 className="srv-title">
-                {s.title}
-                <em>{italicSub[i]}</em>
-              </h3>
-              <p className="srv-desc">{s.desc}</p>
-              <div className="srv-tags">
-                {s.tags.slice(0, 3).map((t) => (
-                  <span key={t} className="tag-chip">{t}</span>
-                ))}
-              </div>
-              <span className="srv-arrow" aria-hidden>&rarr;</span>
-            </a>
-          ))}
+        <div className="svc-grid">
+          {services.map((s, i) => <TiltCard key={s.title} s={s} i={i} />)}
         </div>
+
+        <p className="reveal" style={{
+          marginTop: 36, textAlign: 'center',
+          fontFamily: 'var(--mono)', fontSize: 11, letterSpacing: '0.22em',
+          textTransform: 'uppercase', color: 'rgba(243, 231, 207, 0.55)'
+        }}>
+          ↑ Hover any card — they tilt. Click one to brief us.
+          <ArrowUpRight size={12} style={{ display: 'inline', marginLeft: 8, verticalAlign: 'middle' }} />
+        </p>
       </div>
     </section>
   )

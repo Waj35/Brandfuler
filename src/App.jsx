@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import Cursor from './components/Cursor'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Stats from './components/Stats'
@@ -6,6 +7,7 @@ import Services from './components/Services'
 import Process from './components/Process'
 import Work from './components/Work'
 import Testimonials from './components/Testimonials'
+import FAQ from './components/FAQ'
 import CTA from './components/CTA'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
@@ -21,17 +23,17 @@ export default function App() {
           }
         })
       },
-      { threshold: 0.15 }
+      { threshold: 0.12 }
     )
-    document.querySelectorAll('.reveal-up').forEach((el) => io.observe(el))
+    document.querySelectorAll('.reveal').forEach((el) => io.observe(el))
     return () => io.disconnect()
   }, [])
 
   return (
     <>
-      <div className="paper-stage" />
-      <div className="paper-rules" />
-      <div className="paper-grain" />
+      <div className="bg-glow" />
+      <div className="bg-noise" />
+      <Cursor />
       <Navbar />
       <main>
         <Hero />
@@ -40,6 +42,7 @@ export default function App() {
         <Process />
         <Work />
         <Testimonials />
+        <FAQ />
         <CTA />
         <Contact />
       </main>

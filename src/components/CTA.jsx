@@ -2,22 +2,18 @@ import { ArrowUpRight } from 'lucide-react'
 
 export default function CTA() {
   return (
-    <section className="sec" style={{ paddingTop: 40, paddingBottom: 40 }}>
+    <section className="cta-banner" id="cta">
       <div className="container">
-        <div className="cta-block reveal-up">
-          <div className="cta-inner">
-            <h2 className="cta-h">
-              Ready to burn <em>a little rubber?</em>
-            </h2>
-            <div className="cta-side">
-              <p>A brief, a sketch, a Slack thread &mdash; however you start, we&rsquo;ll meet you there within the week.</p>
-              <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-                <a href="#desk" className="btn btn-lime">Start the engine <ArrowUpRight size={14} className="arrow" /></a>
-                <a href="#dossier" className="btn btn-ghost" style={{ color: '#ebe4d2', borderColor: '#ebe4d2' }}>Read the dossier</a>
-              </div>
-            </div>
-          </div>
+        <h2 className="mega reveal">
+          Let&rsquo;s <em>burn</em> <span className="ic" aria-hidden /> some rubber.
+        </h2>
+        <div className="row reveal">
+          <a href="#contact" className="btn">
+            Start a project <ArrowUpRight size={14} className="ic" />
+          </a>
+          <a href="#work" className="btn">Explore the dossier</a>
         </div>
+        <p className="sub reveal">Two partner slots open · Q3 2026</p>
       </div>
     </section>
   )
