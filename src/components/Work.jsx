@@ -21,8 +21,11 @@ export default function Work() {
 
         <div className="work-grid">
           {work.map((w, i) => (
-            <motion.div
+            <motion.a
               key={w.title}
+              href={w.url || '#'}
+              target={w.url ? '_blank' : undefined}
+              rel={w.url ? 'noopener noreferrer' : undefined}
               className="work-item"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -52,7 +55,7 @@ export default function Work() {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </motion.a>
           ))}
         </div>
       </div>

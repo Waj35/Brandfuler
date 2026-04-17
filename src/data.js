@@ -63,12 +63,14 @@ export const process = [
 ]
 
 export const work = [
-  { title: 'Nebula Finance', cat: 'Web + UI/UX', gradient: 'linear-gradient(135deg, #7c3aed, #06b6d4)' },
-  { title: 'PixelRush', cat: 'Game Development', gradient: 'linear-gradient(135deg, #f472b6, #f97316)' },
-  { title: 'Verdant Co.', cat: 'Branding', gradient: 'linear-gradient(135deg, #22c55e, #06b6d4)' },
-  { title: 'Orbitly', cat: 'SEO + Social', gradient: 'linear-gradient(135deg, #facc15, #ef4444)' },
-  { title: 'Lumen Studio', cat: 'Graphic Design', gradient: 'linear-gradient(135deg, #a855f7, #f472b6)' },
-  { title: 'Hyperloop Labs', cat: 'Web Development', gradient: 'linear-gradient(135deg, #0ea5e9, #6366f1)' }
+  { title: 'Mulhiq', cat: 'Influencer Marketing Platform', url: 'https://mulhiq.com', gradient: 'linear-gradient(135deg, #7c3aed, #06b6d4)' },
+  { title: 'Runrly', cat: 'Marketing Dashboard', url: 'https://runrly.com', gradient: 'linear-gradient(135deg, #f472b6, #f97316)' },
+  { title: 'Midcreatives', cat: 'Campaign Management', url: 'https://midcreatives.com', gradient: 'linear-gradient(135deg, #22c55e, #06b6d4)' },
+  { title: 'GGDen', cat: 'Web Applications', url: 'https://ggden.com', gradient: 'linear-gradient(135deg, #facc15, #ef4444)' },
+  { title: 'Bitslaps', cat: 'Single Page App', url: 'https://bitslaps.com', gradient: 'linear-gradient(135deg, #a855f7, #f472b6)' },
+  { title: 'HoverAlerts', cat: 'Streaming + Real-time', url: 'https://hoveralerts.com', gradient: 'linear-gradient(135deg, #0ea5e9, #6366f1)' },
+  { title: 'Srper', cat: 'SERP API Service', url: 'https://srper.com', gradient: 'linear-gradient(135deg, #f97316, #a855f7)' },
+  { title: 'TukaChat', cat: 'Real-time Messaging', url: 'https://tukachat.com', gradient: 'linear-gradient(135deg, #06b6d4, #22c55e)' }
 ]
 
 export const testimonials = [

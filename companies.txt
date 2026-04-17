@@ -1,0 +1,111 @@
+WAJAHAT IRFAN — PROFESSIONAL EXPERIENCE
+========================================
+
+1. MULHIQ — Dubai, UAE
+   Role: Senior Full Stack Developer
+   Tech: React.js, TypeScript, Next.js, AWS
+   Work: Led technical architecture and engineering strategy for a scalable
+   influencer-marketing platform. Designed high-performance backend systems,
+   REST and GraphQL APIs, and cloud infrastructure using AWS, Docker, and
+   CI/CD pipelines.
+   Website: mulhiq.com
+
+----------------------------------------
+
+2. RUNRLY — Toronto, Canada
+   Role: Senior Full Stack Developer
+   Tech: React.js, Node.js, AWS
+   Work: Developed and optimized the main marketing dashboard for campaigns
+   and performance analytics. Built scalable REST and GraphQL APIs and
+   integrated Google Ads and Meta Ads platforms.
+   Website: runrly.com
+
+----------------------------------------
+
+3. MIDCREATIVES — Quebec, Canada
+   Role: Senior Full Stack Developer
+   Tech: React.js, Next.js, GraphQL
+   Work: Led end-to-end development of scalable full-stack applications for
+   campaign management and client dashboards. Integrated Stripe, Google Ads,
+   and Meta Ads for automation and real-time data tracking.
+   Website: midcreatives.com
+
+----------------------------------------
+
+4. GGDEN — Lahore, Pakistan
+   Role: Mid-Level Full Stack Developer
+   Tech: React.js, Django, Node.js
+   Work: Led a team of developers, spearheading development and optimization
+   of web applications using React.js, Python, Django, Node.js, and AWS.
+   Conducted code reviews and championed best practices.
+   Website: ggden.com
+
+----------------------------------------
+
+5. BITSLAPS
+   Role: Full-Stack Developer
+   Tech: React.js, Node.js, SPA
+   Work: Developed a modern single-page application with client-side
+   rendering, dynamic content loading, and seamless user experience across
+   devices.
+   Website: bitslaps.com
+
+----------------------------------------
+
+6. HOVERALERTS
+   Role: Full-Stack Developer
+   Tech: React.js, WebSockets, Streaming
+   Work: Built a streaming alerts and overlay platform for live content
+   creators. Implemented real-time WebSocket integrations, customizable
+   alert widgets, and streaming tools.
+   Website: hoveralerts.com
+
+----------------------------------------
+
+7. SRPER
+   Role: Full-Stack Developer
+   Tech: Node.js, REST API, Python
+   Work: Developed a SERP API service enabling developers to programmatically
+   query search engine results. Built scalable API endpoints, rate limiting,
+   and data processing pipelines.
+   Website: srper.com
+
+----------------------------------------
+
+8. TUKACHAT
+   Role: Full-Stack Developer
+   Tech: React.js, WebSockets, Node.js
+   Work: Built a real-time messaging and chat platform with WebSocket-based
+   communication, user authentication, message persistence, and responsive
+   UI for seamless cross-device experience.
+   Website: tukachat.com
+
+----------------------------------------
+
+9. TTS TECH SOLUTIONS — Lahore, Pakistan
+   Role: Junior Full Stack Developer
+   Duration: May 2019 – Nov 2021
+   Tech: React.js, Node.js, MongoDB
+   Work: Developed and maintained web applications with responsive UI using
+   React.js. Built server-side applications with Node.js and Express.js.
+   Worked with MongoDB, MySQL, and PostgreSQL.
+
+----------------------------------------
+
+10. BABYPLANET.PK — Lahore, Pakistan
+    Role: Graphic Designer
+    Duration: Jan 2018 – Mar 2019
+    Tech: Photoshop, Illustrator, InDesign
+    Work: Created engaging visual content for digital and print materials
+    including social media graphics, banners, and product packaging using
+    Adobe Creative Suite.
+
+----------------------------------------
+
+11. PITB INCUBATION WING — Lahore, Pakistan
+    Role: Graphic Designer Intern
+    Duration: Sep 2017 – Dec 2017
+    Tech: Adobe Suite, Branding, Marketing
+    Work: Produced designs for digital and print platforms including social
+    media graphics, brochures, and event materials. Collaborated with the
+    marketing team to translate concepts into compelling visual narratives.
