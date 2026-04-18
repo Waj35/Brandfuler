@@ -7,7 +7,9 @@ export default function Footer() {
         <div className="footer-grid">
           <div className="footer-brand">
             <a href="#top" className="logo">
-              <span className="logo-mark">B</span>
+              <span className="logo-mark">
+                <img src="/bf-logo.jpg" alt="Brandfueler" />
+              </span>
               Brandfueler
             </a>
             <p>A full-stack creative studio fueling ambitious brands with design, code, and strategy.</p>

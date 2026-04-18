@@ -11,7 +11,9 @@ export default function Navbar() {
     >
       <div className="nav-inner">
         <a href="#top" className="logo">
-          <span className="logo-mark">B</span>
+          <span className="logo-mark">
+            <img src="/bf-logo.jpg" alt="Brandfueler" />
+          </span>
           Brandfueler
         </a>
         <div className="nav-links">
