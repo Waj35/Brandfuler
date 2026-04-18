@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
-import { Mail, Phone, MapPin, Send, CheckCircle2 } from 'lucide-react'
+import { Mail, Globe, MapPin, Send, CheckCircle2 } from 'lucide-react'
 import { services } from '../data'
 
 export default function Contact() {
@@ -42,25 +42,25 @@ export default function Contact() {
           >
             <h3>Reach out directly</h3>
             <p>We respond within 1 business day. Or book a 30-min strategy call — on the house.</p>
-            <div className="contact-detail">
+            <a href="mailto:brandfueler11@gmail.com" className="contact-detail">
               <div className="contact-detail-icon"><Mail size={18} /></div>
               <div>
-                <strong>hello@brandfueler.com</strong>
+                <strong>brandfueler11@gmail.com</strong>
                 <span>Drop us a note anytime</span>
               </div>
-            </div>
-            <div className="contact-detail">
-              <div className="contact-detail-icon"><Phone size={18} /></div>
+            </a>
+            <a href="https://brandfuler.vercel.app/" target="_blank" rel="noopener noreferrer" className="contact-detail">
+              <div className="contact-detail-icon"><Globe size={18} /></div>
               <div>
-                <strong>+1 (415) 555-0199</strong>
-                <span>Mon – Fri, 9am – 6pm PT</span>
+                <strong>brandfuler.vercel.app</strong>
+                <span>Browse the portfolio</span>
               </div>
-            </div>
+            </a>
             <div className="contact-detail">
               <div className="contact-detail-icon"><MapPin size={18} /></div>
               <div>
                 <strong>Remote-first, globally</strong>
-                <span>Studios in SF, London & Bangalore</span>
+                <span>Working with clients worldwide</span>
               </div>
             </div>
           </motion.div>
