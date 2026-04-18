@@ -73,6 +73,23 @@ export const work = [
   { title: 'TukaChat', cat: 'Real-time Messaging', url: 'https://tukachat.com', gradient: 'linear-gradient(135deg, #06b6d4, #22c55e)' }
 ]
 
+export const mockups = [
+  { src: '/mockups/jtd-mockup-1.jpg', title: 'JTD', cat: 'Brand Mockup' },
+  { src: '/mockups/novalink-mockup.jpg', title: 'Novalink', cat: 'Brand Mockup' },
+  { src: '/mockups/spydu-mockup.jpg', title: 'SPYDU', cat: 'Brand Mockup' },
+  { src: '/mockups/stela-mockup.jpg', title: 'Stela', cat: 'Brand Mockup' },
+  { src: '/mockups/ugjp-mockup.jpg', title: 'UGJP', cat: 'Brand Mockup' },
+  { src: '/mockups/casart-choice-post.jpg', title: 'Casart Choice', cat: 'Social Post' },
+  { src: '/mockups/luminexe-post.jpg', title: 'Luminexe', cat: 'Social Post' },
+  { src: '/mockups/lydp-baring-post.jpg', title: 'Lydp Baring', cat: 'Social Post' },
+  { src: '/mockups/ryhyoma-post.jpg', title: 'Ryhyoma', cat: 'Social Post' },
+  { src: '/mockups/sleeping-stream-post.jpg', title: 'Sleeping Stream', cat: 'Social Post' },
+  { src: '/mockups/starlinkea-post.jpg', title: 'Starlinkea', cat: 'Social Post' },
+  { src: '/mockups/sweetie-whip-post.jpg', title: 'Sweetie Whip', cat: 'Social Post' },
+  { src: '/mockups/yftdlight-post.jpg', title: 'Yftdlight', cat: 'Social Post' },
+  { src: '/mockups/yunova-post.jpg', title: 'Yunova', cat: 'Social Post' }
+]
+
 export const testimonials = [
   {
     quote: 'Brandfueler redesigned our product and tripled our signups in a single quarter. They move fast, think sharp, and care deeply about the work.',

@@ -4,6 +4,7 @@ import Stats from './components/Stats'
 import Services from './components/Services'
 import Process from './components/Process'
 import Work from './components/Work'
+import Mockups from './components/Mockups'
 import Testimonials from './components/Testimonials'
 import CTA from './components/CTA'
 import Contact from './components/Contact'
@@ -23,6 +24,7 @@ export default function App() {
         <Services />
         <Process />
         <Work />
+        <Mockups />
         <Testimonials />
         <CTA />
         <Contact />
