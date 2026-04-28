@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Brandfueler — 6 Lessons Post</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', system-ui, sans-serif; }
+  body {
+    background: #1a1a24;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 20px 60px;
+    gap: 24px;
+  }
+  .toolbar {
+    position: sticky;
+    top: 20px;
+    z-index: 100;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(12px);
+    padding: 14px 22px;
+    border-radius: 14px;
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .toolbar button {
+    padding: 11px 22px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #a855f7, #06b6d4);
+    color: white;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: transform 0.15s;
+  }
+  .toolbar button.secondary {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+  .toolbar button:hover { transform: translateY(-1px); }
+  .toolbar button:disabled { opacity: 0.5; cursor: wait; transform: none; }
+  .toolbar p { color: rgba(255,255,255,0.65); font-size: 13px; }
+  #status { color: #06b6d4; font-size: 13px; font-weight: 600; }
+
+  .slide {
+    width: 1080px;
+    height: 1350px;
+    background: #0b0b14;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    padding: 90px 80px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 4px;
+  }
+  .blob-1, .blob-2 {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(140px);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .blob-1 {
+    width: 650px; height: 650px;
+    background: rgba(168, 85, 247, 0.38);
+    top: -220px; left: -200px;
+  }
+  .blob-2 {
+    width: 750px; height: 750px;
+    background: rgba(6, 182, 212, 0.25);
+    bottom: -280px; right: -250px;
+  }
+  .content { position: relative; z-index: 1; display: flex; flex-direction: column; height: 100%; }
+
+  .grad {
+    background: linear-gradient(135deg, #a855f7, #06b6d4);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 11px 20px;
+    border-radius: 100px;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    color: rgba(255,255,255,0.85);
+    width: fit-content;
+    margin-bottom: 32px;
+    text-transform: uppercase;
+  }
+  .eyebrow .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #a855f7, #06b6d4);
+  }
+  .title {
+    font-size: 72px;
+    line-height: 1.05;
+    font-weight: 800;
+    letter-spacing: -2px;
+    margin-bottom: 50px;
+  }
+  .lessons { display: flex; flex-direction: column; gap: 22px; flex: 1; }
+  .lesson {
+    display: flex; gap: 22px; align-items: flex-start;
+  }
+  .num {
+    flex-shrink: 0;
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(168,85,247,0.25), rgba(6,182,212,0.25));
+    border: 1px solid rgba(168,85,247,0.5);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; font-weight: 800;
+    color: white;
+  }
+  .lesson-text {
+    font-size: 26px;
+    line-height: 1.4;
+    font-weight: 500;
+    color: rgba(255,255,255,0.92);
+    padding-top: 8px;
+  }
+  .lesson-text b {
+    font-weight: 800;
+    color: white;
+  }
+  .footer {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+  .brand {
+    font-size: 30px;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+  }
+  .tagline {
+    font-size: 16px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 6px;
+    font-weight: 500;
+  }
+  .url {
+    font-size: 18px;
+    color: rgba(255,255,255,0.6);
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+  <div class="toolbar">
+    <button id="pdfBtn" onclick="exportPDF()">📄 Download PDF (for LinkedIn)</button>
+    <button class="secondary" onclick="exportSlide()">⬇ PNG (1080×1350)</button>
+    <p>PDF = LinkedIn document post. PNG = single image post.</p>
+    <span id="status"></span>
+  </div>
+
+  <div class="slide" id="slide" data-name="brandfueler-6-lessons">
+    <div class="blob-1"></div>
+    <div class="blob-2"></div>
+    <div class="content">
+      <span class="eyebrow"><span class="dot"></span>FOUNDER INSIGHTS</span>
+      <h1 class="title"><br>6 lessons every founder should steal.</h1>
+
+      <div class="lessons">
+        <div class="lesson"><div class="num">1</div><p class="lesson-text">A <b>slow site = a dead brand.</b><br>Speed isn't a feature. It's a promise.</p></div>
+        <div class="lesson"><div class="num">2</div><p class="lesson-text">Your <b>logo is the smallest part</b> of your brand. The feeling it triggers — <i>that's</i> the brand.</p></div>
+        <div class="lesson"><div class="num">3</div><p class="lesson-text"><b>"Just make it pop"</b> is the most expensive sentence in design. Clarity > Creativity.</p></div>
+        <div class="lesson"><div class="num">4</div><p class="lesson-text">SEO isn't dead. <b>Lazy SEO is.</b> One pillar page beats 50 thin posts.</p></div>
+        <div class="lesson"><div class="num">5</div><p class="lesson-text">The best UX is <b>invisible.</b> If users have to think, you've already lost them.</p></div>
+        <div class="lesson"><div class="num">6</div><p class="lesson-text">Marketing doesn't fix a broken product. <b>Fix the product. Then turn up the volume.</b></p></div>
+      </div>
+
+      <div class="footer">
+        <div>
+          <div class="brand"><span class="grad">Brandfueler</span> ⚡</div>
+          <div class="tagline">Brands that refuse to be forgotten.</div>
+        </div>
+        <div class="url">brandfueler.com</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    async function exportSlide() {
+      await document.fonts.ready;
+      const slide = document.getElementById('slide');
+      const dataUrl = await htmlToImage.toPng(slide, {
+        pixelRatio: 2,
+        width: 1080,
+        height: 1350,
+        cacheBust: true
+      });
+      const a = document.createElement('a');
+      a.href = dataUrl;
+      a.download = 'brandfueler-6-lessons.png';
+      a.click();
+    }
+
+    async function exportPDF() {
+      const btn = document.getElementById('pdfBtn');
+      const status = document.getElementById('status');
+      btn.disabled = true;
+      status.textContent = 'Rendering…';
+      await document.fonts.ready;
+      const { jsPDF } = window.jspdf;
+      const pdf = new jsPDF({
+        orientation: 'portrait',
+        unit: 'px',
+        format: [1080, 1350],
+        compress: true
+      });
+      const slide = document.getElementById('slide');
+      const dataUrl = await htmlToImage.toPng(slide, {
+        pixelRatio: 2,
+        width: 1080,
+        height: 1350,
+        cacheBust: true
+      });
+      pdf.addImage(dataUrl, 'PNG', 0, 0, 1080, 1350, undefined, 'FAST');
+      status.textContent = 'Saving PDF…';
+      pdf.save('brandfueler-6-lessons.pdf');
+      status.textContent = '✓ Done! Upload to LinkedIn as a Document post.';
+      btn.disabled = false;
+      setTimeout(() => { status.textContent = ''; }, 6000);
+    }
+  </script>
+</body>
+</html>
