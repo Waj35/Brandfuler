@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Brandfueler — Hiring a Vibe Coder Carousel</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', system-ui, sans-serif; }
+  body {
+    background: #1a1a24;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 20px 60px;
+    gap: 30px;
+  }
+  .toolbar {
+    position: sticky;
+    top: 20px;
+    z-index: 100;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(12px);
+    padding: 14px 22px;
+    border-radius: 14px;
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .toolbar button {
+    padding: 11px 22px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #a855f7, #06b6d4);
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+  }
+  .toolbar button.secondary {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+  .toolbar button:hover { opacity: 0.9; }
+  .toolbar button:disabled { opacity: 0.5; cursor: wait; }
+  #status { color: #06b6d4; font-size: 13px; font-weight: 600; }
+  .toolbar p { color: rgba(255,255,255,0.65); font-size: 13px; }
+
+  .slide-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .slide-actions button {
+    padding: 7px 16px;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 8px;
+    background: transparent;
+    color: white;
+    font-size: 12px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 500;
+  }
+  .slide-actions button:hover {
+    background: rgba(255,255,255,0.06);
+  }
+
+  .slide {
+    width: 1080px;
+    height: 1350px;
+    background: #0b0b14;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    padding: 100px 90px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 4px;
+  }
+  .blob-1, .blob-2 {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(150px);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .blob-1 {
+    width: 700px; height: 700px;
+    background: rgba(168, 85, 247, 0.35);
+    top: -250px; left: -220px;
+  }
+  .blob-2 {
+    width: 800px; height: 800px;
+    background: rgba(6, 182, 212, 0.22);
+    bottom: -300px; right: -260px;
+  }
+  .content { position: relative; z-index: 1; display: flex; flex-direction: column; height: 100%; }
+
+  .grad {
+    background: linear-gradient(135deg, #a855f7, #06b6d4);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 11px 20px;
+    border-radius: 100px;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    color: rgba(255,255,255,0.85);
+    width: fit-content;
+    text-transform: uppercase;
+  }
+  .eyebrow .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #a855f7, #06b6d4);
+  }
+
+  /* COVER SLIDE */
+  .slide.cover .content { justify-content: center; }
+  .cover-title {
+    font-size: 110px;
+    line-height: 1;
+    font-weight: 900;
+    letter-spacing: -4px;
+    margin: 32px 0 36px;
+  }
+  .cover-sub {
+    font-size: 30px;
+    color: rgba(255,255,255,0.78);
+    line-height: 1.45;
+    max-width: 850px;
+    font-weight: 500;
+  }
+  .cover-foot {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .swipe-hint {
+    font-size: 22px;
+    color: rgba(255,255,255,0.6);
+    font-weight: 700;
+    letter-spacing: 2px;
+  }
+
+  /* TIP SLIDE */
+  .tip-num {
+    font-size: 240px;
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -10px;
+    background: linear-gradient(135deg, #a855f7, #06b6d4);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+  .tip-title {
+    font-size: 84px;
+    line-height: 1.05;
+    font-weight: 800;
+    letter-spacing: -2.5px;
+    margin-bottom: 36px;
+    max-width: 880px;
+  }
+  .tip-desc {
+    font-size: 32px;
+    line-height: 1.45;
+    color: rgba(255,255,255,0.78);
+    font-weight: 500;
+    max-width: 850px;
+  }
+  .tip-desc b {
+    color: white;
+    font-weight: 700;
+  }
+
+  /* CTA SLIDE */
+  .slide.cta .content { justify-content: center; }
+  .cta-quote {
+    font-size: 80px;
+    line-height: 1.1;
+    font-weight: 900;
+    letter-spacing: -2.5px;
+    margin: 32px 0 32px;
+  }
+  .cta-desc {
+    font-size: 30px;
+    line-height: 1.5;
+    color: rgba(255,255,255,0.78);
+    margin-bottom: 50px;
+    max-width: 820px;
+    font-weight: 500;
+  }
+  .cta-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 24px 40px;
+    background: linear-gradient(135deg, #a855f7, #06b6d4);
+    border-radius: 100px;
+    font-size: 30px;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 30px;
+    width: fit-content;
+  }
+
+  /* FOOTER */
+  .slide-footer {
+    margin-top: auto;
+    padding-top: 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .brand {
+    font-size: 28px;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+  }
+  .tagline-sm {
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 4px;
+    font-weight: 500;
+  }
+  .slide-num {
+    font-size: 16px;
+    color: rgba(255,255,255,0.45);
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+  <div class="toolbar">
+    <button id="pdfBtn" onclick="exportPDF()">📄 Download PDF (for LinkedIn)</button>
+    <button class="secondary" onclick="exportAll()">⬇ All 9 PNGs</button>
+    <p>Upload PDF to LinkedIn as a "Document" post — that's how real carousels work.</p>
+    <span id="status"></span>
+  </div>
+
+  <!-- SLIDE 1: COVER -->
+  <div class="slide-wrap">
+    <div class="slide cover" id="s1" data-name="01-cover">
+      <div class="blob-1"></div><div class="blob-2"></div>
+      <div class="content">
+        <span class="eyebrow"><span class="dot"></span>FOUNDER PLAYBOOK</span>
+        <h1 class="cover-title">Hiring a <span class="grad">vibe coder?</span></h1>
+        <p class="cover-sub">Read this before you sign the offer.<br>7 things every founder must check in <b style="color:#fff">2026</b> →</p>
+        <div class="cover-foot">
+          <div>
+            <div class="brand"><span class="grad">Brandfueler</span> ⚡</div>
+            <div class="tagline-sm">Brands that refuse to be forgotten.</div>
+          </div>
+          <div class="swipe-hint">SWIPE →</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-actions"><button onclick="exportOne('s1')">Save Slide 1</button></div>
+  </div>
+
+  <!-- SLIDE 2: TIP 1 -->
+  <div class="slide-wrap">
+    <div class="slide" id="s2" data-name="02-tip-1-shipping">
+      <div class="blob-1"></div><div class="blob-2"></div>
+      <div class="content">
+        <span class="eyebrow"><span class="dot"></span>TIP 01</span>
+        <div class="tip-num">01</div>
+        <h2 class="tip-title">Shipping fast ≠ shipping right.</h2>
+        <p class="tip-desc">A vibe coder can build your MVP in a weekend.<br><b>Can they keep it alive on Monday?</b></p>
+        <div class="slide-footer">
+          <div class="brand"><span class="grad">Brandfueler</span> ⚡</div>
+          <div class="slide-num">02 / 09</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-actions"><button onclick="exportOne('s2')">Save Slide 2</button></div>
+  </div>
+
+  <!-- SLIDE 3: TIP 2 -->
+  <div class="slide-wrap">
+    <div class="slide" id="s3" data-name="03-tip-2-debug">
+      <div class="blob-1"></div><div class="blob-2"></div>
+      <div class="content">
+        <span class="eyebrow"><span class="dot"></span>TIP 02</span>
+        <div class="tip-num">02</div>
+        <h2 class="tip-title">Hire the debugger, not the prompter.</h2>
+        <p class="tip-desc">Anyone can ask AI to write code.<br><b>Few can fix it</b> when it silently breaks at 2 a.m.</p>
+        <div class="slide-footer">
+          <div class="brand"><span class="grad">Brandfueler</span> ⚡</div>
+          <div class="slide-num">03 / 09</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-actions"><button onclick="exportOne('s3')">Save Slide 3</button></div>
+  </div>
+
+  <!-- SLIDE 4: TIP 3 -->
+  <div class="slide-wrap">
+    <div class="slide" id="s4" data-name="04-tip-3-fundamentals">
+      <div class="blob-1"></div><div class="blob-2"></div>
+      <div class="content">
+        <span class="eyebrow"><span class="dot"></span>TIP 03</span>
+        <div class="tip-num">03</div>
+        <h2 class="tip-title">Fundamentals still win.</h2>
+        <p class="tip-desc">AI is a power tool — not a substitute for knowing what a database actually does. <b>Test the basics.</b></p>
+        <div class="slide-footer">
+          <div class="brand"><span class="grad">Brandfueler</span> ⚡</div>
+          <div class="slide-num">04 / 09</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-actions"><button onclick="exportOne('s4')">Save Slide 4</button></div>
+  </div>
+
+  <!-- SLIDE 5: TIP 4 -->
+  <div class="slide-wrap">
+    <div class="slide" id="s5" data-name="05-tip-4-broken-repo">
+      <div class="blob-1"></div><div class="blob-2"></div>
+      <div class="content">
+        <span class="eyebrow"><span class="dot"></span>TIP 04</span>
+        <div class="tip-num">04</div>
+        <h2 class="tip-title">Test them on a broken repo. Not a blank one.</h2>
+        <p class="tip-desc">Greenfield demos are easy.<br><b>Reading 4,000 lines of legacy code</b> is the real interview.</p>
+        <div class="slide-footer">
+          <div class="brand"><span class="grad">Brandfueler</span> ⚡</div>
+          <div class="slide-num">05 / 09</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-actions"><button onclick="exportOne('s5')">Save Slide 5</button></div>
+  </div>
+
+  <!-- SLIDE 6: TIP 5 -->
+  <div class="slide-wrap">
+    <div class="slide" id="s6" data-name="06-tip-5-taste">
+      <div class="blob-1"></div><div class="blob-2"></div>
+      <div class="content">
+        <span class="eyebrow"><span class="dot"></span>TIP 05</span>
+        <div class="tip-num">05</div>
+        <h2 class="tip-title">Hire for taste. AI can't give it.</h2>
+        <p class="tip-desc">Models will write 80% of the code.<br><b>Your hire decides which 80%</b> — and that's the whole product.</p>
+        <div class="slide-footer">
+          <div class="brand"><span class="grad">Brandfueler</span> ⚡</div>
+          <div class="slide-num">06 / 09</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-actions"><button onclick="exportOne('s6')">Save Slide 6</button></div>
+  </div>
+
+  <!-- SLIDE 7: TIP 6 -->
+  <div class="slide-wrap">
+    <div class="slide" id="s7" data-name="07-tip-6-security">
+      <div class="blob-1"></div><div class="blob-2"></div>
+      <div class="content">
+        <span class="eyebrow"><span class="dot"></span>TIP 06</span>
+        <div class="tip-num">06</div>
+        <h2 class="tip-title">Watch for "AI did it" syndrome.</h2>
+        <p class="tip-desc">If they can't explain the code line by line, <b>they didn't write it — they pasted it.</b> One is shipping. The other is gambling.</p>
+        <div class="slide-footer">
+          <div class="brand"><span class="grad">Brandfueler</span> ⚡</div>
+          <div class="slide-num">07 / 09</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-actions"><button onclick="exportOne('s7')">Save Slide 7</button></div>
+  </div>
+
+  <!-- SLIDE 8: TIP 7 -->
+  <div class="slide-wrap">
+    <div class="slide" id="s8" data-name="08-tip-7-outcomes">
+      <div class="blob-1"></div><div class="blob-2"></div>
+      <div class="content">
+        <span class="eyebrow"><span class="dot"></span>TIP 07</span>
+        <div class="tip-num">07</div>
+        <h2 class="tip-title">Pay for outcomes. Not output.</h2>
+        <p class="tip-desc">Lines of code are cheap now.<br><b>Working features that don't break</b> — that's what you're actually buying.</p>
+        <div class="slide-footer">
+          <div class="brand"><span class="grad">Brandfueler</span> ⚡</div>
+          <div class="slide-num">08 / 09</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-actions"><button onclick="exportOne('s8')">Save Slide 8</button></div>
+  </div>
+
+  <!-- SLIDE 9: CTA -->
+  <div class="slide-wrap">
+    <div class="slide cta" id="s9" data-name="09-cta">
+      <div class="blob-1"></div><div class="blob-2"></div>
+      <div class="content">
+        <span class="eyebrow"><span class="dot"></span>THE BIG IDEA</span>
+        <h2 class="cta-quote">Vibe coding is a <span class="grad">tool.</span><br>Talent is still talent.</h2>
+        <p class="cta-desc">Need help building a brand around your product — not just the code?<br>DM us <b style="color:#fff">"BUILD"</b> on LinkedIn this week.</p>
+        <div class="cta-pill">DM "BUILD" → Free Brand Audit ⚡</div>
+        <div class="slide-footer">
+          <div>
+            <div class="brand"><span class="grad">Brandfueler</span> ⚡</div>
+            <div class="tagline-sm">Brands that refuse to be forgotten.</div>
+          </div>
+          <div class="slide-num">09 / 09</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-actions"><button onclick="exportOne('s9')">Save Slide 9</button></div>
+  </div>
+
+  <script>
+    async function exportOne(id) {
+      await document.fonts.ready;
+      const slide = document.getElementById(id);
+      const dataUrl = await htmlToImage.toPng(slide, {
+        pixelRatio: 2,
+        width: 1080,
+        height: 1350,
+        cacheBust: true
+      });
+      const a = document.createElement('a');
+      a.href = dataUrl;
+      a.download = slide.dataset.name + '.png';
+      a.click();
+    }
+    async function exportAll() {
+      await document.fonts.ready;
+      const slides = document.querySelectorAll('.slide');
+      for (const slide of slides) {
+        const dataUrl = await htmlToImage.toPng(slide, {
+          pixelRatio: 2,
+          width: 1080,
+          height: 1350,
+          cacheBust: true
+        });
+        const a = document.createElement('a');
+        a.href = dataUrl;
+        a.download = slide.dataset.name + '.png';
+        a.click();
+        await new Promise(r => setTimeout(r, 500));
+      }
+    }
+
+    async function exportPDF() {
+      const btn = document.getElementById('pdfBtn');
+      const status = document.getElementById('status');
+      btn.disabled = true;
+      await document.fonts.ready;
+      const { jsPDF } = window.jspdf;
+      const pdf = new jsPDF({
+        orientation: 'portrait',
+        unit: 'px',
+        format: [1080, 1350],
+        compress: true
+      });
+      const slides = document.querySelectorAll('.slide');
+      for (let i = 0; i < slides.length; i++) {
+        status.textContent = `Rendering slide ${i + 1} / ${slides.length}…`;
+        const dataUrl = await htmlToImage.toPng(slides[i], {
+          pixelRatio: 2,
+          width: 1080,
+          height: 1350,
+          cacheBust: true
+        });
+        if (i > 0) pdf.addPage([1080, 1350], 'portrait');
+        pdf.addImage(dataUrl, 'PNG', 0, 0, 1080, 1350, undefined, 'FAST');
+      }
+      status.textContent = 'Saving PDF…';
+      pdf.save('brandfueler-hiring-vibe-coder.pdf');
+      status.textContent = '✓ Done! Upload to LinkedIn as a Document post.';
+      btn.disabled = false;
+      setTimeout(() => { status.textContent = ''; }, 6000);
+    }
+  </script>
+</body>
+</html>
